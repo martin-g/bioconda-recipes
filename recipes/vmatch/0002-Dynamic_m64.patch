@@ -1,0 +1,27 @@
+diff '--color=auto' -r -u vmatch-2.3.0-Linux_x86_64-64bit-original/SELECT/Shareddef vmatch-2.3.0-Linux_x86_64-64bit/SELECT/Shareddef
+--- vmatch-2.3.0-Linux_x86_64-64bit-original/SELECT/Shareddef	2017-06-13 02:29:38.000000000 +0300
++++ vmatch-2.3.0-Linux_x86_64-64bit/SELECT/Shareddef	2023-11-03 10:00:09.356610515 +0200
+@@ -1,2 +1,7 @@
+-SHARED=-shared -fPIC -m64
++ARCH := $(shell uname -m)
++ifeq ($(ARCH), x86_64)
++   ARCH_CFLAGS=-m64
++endif
++
++SHARED=-shared -fPIC $(ARCH_CFLAGS)
+ SHAREDSUFFIX=so
+diff '--color=auto' -r -u vmatch-2.3.0-Linux_x86_64-64bit-original/SELECT/vmrelease.h vmatch-2.3.0-Linux_x86_64-64bit/SELECT/vmrelease.h
+--- vmatch-2.3.0-Linux_x86_64-64bit-original/SELECT/vmrelease.h	2017-06-13 02:29:38.000000000 +0300
++++ vmatch-2.3.0-Linux_x86_64-64bit/SELECT/vmrelease.h	2023-11-03 10:09:55.269649774 +0200
+@@ -14,7 +14,11 @@
+ #ifndef VSTREERELEASE_H
+ #define VSTREERELEASE_H
+ #define VSTREECOMPILEDATE "2017-06-12 23:29:33"
++#ifdef __x86_64__
+ #define VSTREECFLAGS "-DWITHSYSCONF -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -g -O3 -Wundef -Wshadow -Wstrict-prototypes -Wcast-align -Wsign-compare -Wnested-externs -Wall -Wcast-qual -Wpointer-arith -Winline -Werror -m64 -Wno-error=maybe-uninitialized -fno-stack-protector -U_FORTIFY_SOURCE -D_GNU_SOURCE -I../include -I../../../genometools/src/external/zlib-1.2.8 -I../../../genometools/src/external/bzip2-1.0.6 -DNOLICENSEMANAGER"
++#elif
++#define VSTREECFLAGS "-DWITHSYSCONF -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -g -O3 -Wundef -Wshadow -Wstrict-prototypes -Wcast-align -Wsign-compare -Wnested-externs -Wall -Wcast-qual -Wpointer-arith -Winline -Werror -Wno-error=maybe-uninitialized -fno-stack-protector -U_FORTIFY_SOURCE -D_GNU_SOURCE -I../include -I../../../genometools/src/external/zlib-1.2.8 -I../../../genometools/src/external/bzip2-1.0.6 -DNOLICENSEMANAGER"
++#endif
+ #define VSTREERELEASEDATE "2007-Aug-27"
+ #define VSTREEVERSION "2.3.0"
+ #define VSTREECOMPILEHOST "thinkpad"
