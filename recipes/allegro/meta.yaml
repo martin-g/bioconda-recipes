@@ -15,6 +15,9 @@ source:
     - patches/options.patch
     - patches/peel.patch # [osx]
     - patches/scoredistfull.patch
+    - patches/config.sub.patch
+    - patches/config.guess.patch
+    - patches/configure.patch
 
 build:
   skip: True  # [osx]
