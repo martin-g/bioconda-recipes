@@ -1,22 +1,29 @@
 package:
   name: arvados-cli
-  version: "0.1.20151207150126"
+  version: "2.7.0"
 build:
-  number: 1
+  number: 0
   skip: True # [osx]
 source:
-  url: https://rubygems.org/downloads/arvados-cli-0.1.20151207150126.gem
-  sha256: 2e1f070bdc2adb068739b73297e008b4b12f2d1376f105a1aff796b138b8a65b
+  url: https://rubygems.org/downloads/arvados-cli-2.7.0.gem
+  sha256: 10fcd5ef6a09d3a31de4c8dd4afd3db593044c2c581ba6292547d78e56e6feba
 requirements:
   build:
-    - ruby
+    - ruby >=2.6
     - curl
+    - make
+    - zlib
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
   run:
-    - ruby
     - curl
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
 test:
   commands:
-    - "arv --help 2>&1 | grep 'ARVADOS'"
+    - "arv-tag --help 2>&1 | grep 'ARVADOS'"
 about:
   home: http://doc.arvados.org/sdk/cli/index.html
   license: Apache v2

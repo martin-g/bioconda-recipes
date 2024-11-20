@@ -521,7 +521,7 @@ recipes/fseq
 
 # node error
 recipes/azure-cli
-recipes/arvados-cli
+#recipes/arvados-cli
 
 # takes to long to install
 recipes/bcbio-rnaseq
